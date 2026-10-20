@@ -1,0 +1,1 @@
+{"name":"taskora-api","version":"1.0.0","private":true,"description":"A focused task workspace powered by a RESTful Express API","type":"module","scripts":{"start":"node src/server.js","dev":"node --watch src/server.js","test":"node --test"},"engines":{"node":">=22"},"dependencies":{"express":"^5.1.0"}}

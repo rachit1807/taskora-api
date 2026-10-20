@@ -1,0 +1,13 @@
+import express from 'express';
+import apiRoutes from './routes/apiRoutes.js';
+import errorHandler from './middleware/errorHandler.js';
+const app=express();
+app.disable('x-powered-by');
+app.use((req,res,next)=>{res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('Referrer-Policy','same-origin');next();});
+app.use(express.json({limit:'32kb'}));
+app.get('/api/health',(req,res)=>res.json({success:true,data:{status:'ok'}}));
+app.use('/api',apiRoutes);
+app.use(express.static(new URL('../public/',import.meta.url).pathname));
+app.use((req,res)=>res.status(404).json({success:false,error:{message:'Route not found.'}}));
+app.use(errorHandler);
+export default app;
