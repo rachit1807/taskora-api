@@ -1,4 +1,4 @@
-import {readFile, writeFile, mkdir} from 'node:fs/promises';
+import {readFile, writeFile, mkdir, rename} from 'node:fs/promises';
 import {randomUUID} from 'node:crypto';
 const file = process.env.DATA_FILE || new URL('../../data/tasks.json', import.meta.url);
 let queue = Promise.resolve();
@@ -11,7 +11,7 @@ const seed = [
  ['Make room for deep work','A little focus goes a long way.','done','medium','Personal']
 ].map(([title,description,status,priority,category])=>({id:randomUUID(),title,description,status,priority,category,dueDate:'',createdAt:new Date().toISOString(),updatedAt:new Date().toISOString()}));
 async function read(){try{return JSON.parse(await readFile(file,'utf8'));}catch(e){if(e.code==='ENOENT')return structuredClone(seed);throw e;}}
-function transaction(fn){const result=queue.then(async()=>{const tasks=await read();const value=fn(tasks);await mkdir(new URL('../../data/',import.meta.url),{recursive:true});await writeFile(file,JSON.stringify(tasks,null,2));return value;});queue=result.catch(()=>{});return result;}
+function transaction(fn){const result=queue.then(async()=>{const tasks=await read();const value=fn(tasks);await mkdir(new URL('../../data/',import.meta.url),{recursive:true});const temp=typeof file==='string'?file+'.tmp':new URL(file.href+'.tmp');await writeFile(temp,JSON.stringify(tasks,null,2));await rename(temp,file);return value;});queue=result.catch(()=>{});return result;}
 function validate(body){
  const {title,description='',status='todo',priority='medium',category='Personal',dueDate=''}=body;
  if(typeof title!=='string'||!title.trim()||title.length>120)throw fail('Title must contain 1–120 characters.');
