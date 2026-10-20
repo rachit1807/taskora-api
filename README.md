@@ -2,9 +2,9 @@
 
 # Taskora ✳
 
-### Make space for progress.
+### Your plans. In motion.
 
-A thoughtful task workspace with a clean REST API. Built for focused work, clear priorities, and small wins.
+A task command board with a clean REST API. Built for clear priorities, visible progress, and work in motion.
 
 [Live demo](https://taskora-api-nwq2.onrender.com) · [Features](#features) · [Quick start](#quick-start) · [API reference](#api-reference) · [Testing](#testing)
 
@@ -18,7 +18,7 @@ A thoughtful task workspace with a clean REST API. Built for focused work, clear
 
 ## The idea
 
-Taskora brings a little structure to everyday work. A warm neutral palette, lime accents, editorial typography, and a quiet navigation rail keep the focus on what comes next. The same Express server serves the interface and REST API.
+Taskora turns everyday work into a clear three-stage workflow. A cobalt masthead, orange completion panel, condensed display type, and technical labels give the workspace its command-board identity. Tasks move through To do, In progress, and Completed lanes; a saved Board/List switch lets you choose your view. The same Express server serves the interface and REST API.
 
 ## Features
 
@@ -30,6 +30,7 @@ Taskora brings a little structure to everyday work. A warm neutral palette, lime
 - Track total tasks, work in progress, completions, and completion percentage.
 - Switch between light and dark themes; your preference is saved on your device.
 - Responsive phone, tablet, and desktop layouts with keyboard-accessible controls.
+- Board and List layouts with a saved preference; press `/` to jump to search.
 - Consistent JSON responses, input validation, and centralized error handling.
 - Local JSON storage with serialized writes and an isolated API integration test.
 
